@@ -1,7 +1,8 @@
 import React,{useMemo,useState} from 'react';
+import UnderstandingCheck from './UnderstandingCheck.jsx';
 const fmt=x=>{if(!x)return 'Not scheduled';const d=new Date(String(x).slice(0,10)+'T12:00:00');return Number.isNaN(d.getTime())?String(x):d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})};
 const dl=(name,text)=>{const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),100)};
-export default function PatientView({data,patientId,setPatientId,setTab,patch}){
+export default function PatientView({data,setData,patientId,setPatientId,setTab,patch}){
  const [showHistory,setShowHistory]=useState(false);
  const patient=data.patients.find(p=>p.id===patientId);
  const appointments=data.appointments.filter(x=>x.patientId===patientId&&x.status!=='Cancelled').sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
@@ -41,7 +42,7 @@ export default function PatientView({data,patientId,setPatientId,setTab,patch}){
  </section>
  <div className="two"><section className="patientpanel"><h3>Food & daily care</h3>{[['Recommended foods',latest?.guidance?.take],['Foods to avoid or limit',latest?.guidance?.avoid],['Selected precautions',latest?.guidance?.care]].map(([title,entries])=><div className="careguidance" key={title}><strong>{title}</strong>{entries?.length?<ul>{entries.map((txt,i)=><li key={i}>{txt}</li>)}</ul>:<p>No instructions linked</p>}</div>)}</section><section className="patientpanel"><h3>Follow-ups & reminders</h3>{tasks.length?tasks.map(x=><div className="patienttask" key={x.id}><div><strong>{x.title}</strong><small>Due {fmt(x.due)}</small><p>{x.instructions}</p></div><span className={'pill '+(x.status==='Pending'?'warn':'')}>{x.status}</span></div>):<p className="muted">No follow-up tasks currently linked.</p>}
  <h4>Daily check-ins</h4>{reminders.length?reminders.map(x=><label className="patientreminder" key={x.id}><input type="checkbox" checked={x.status==='Done'} onChange={e=>patch('reminders',x.id,{status:e.target.checked?'Done':'Pending'})}/><span><strong>{x.title}</strong><small>{x.time} · {x.frequency}</small></span></label>):<p className="muted">No reminders set.</p>}</section></div>
- <div className="patientdisclaimer"><strong>Demo notice:</strong> The data here is fictional and stored only in this browser. This is not a signed prescription, medical advice, a patient-authenticated portal, or an actual reminder delivery system. A clinician must verify all instructions before patient use.</div>
+ <UnderstandingCheck data={data} setData={setData} patientId={patientId} prescriptionId={latest?.id}/><div className="patientdisclaimer"><strong>Demo notice:</strong> The data here is fictional and stored only in this browser. This is not a signed prescription, medical advice, a patient-authenticated portal, or an actual reminder delivery system. A clinician must verify all instructions before patient use.</div>
  </div>
  <section className="panel"><div className="panelhead"><h2>Care history</h2><button className="ghost" onClick={()=>setShowHistory(x=>!x)}>{showHistory?'Hide':'Show'} previous imported records</button></div>{showHistory?rx.length?rx.map(x=><div className="rxhistory" key={x.id}><div><strong>{x.condition||'Condition not recorded'}</strong><span>{fmt(x.created)} · {x.meds.length} entries</span></div><button className="ghost" onClick={()=>setTab('journey')}>Full timeline</button></div>):<p className="muted">No imported records yet.</p>:<p className="muted">Select “Show” to view the full imported prescription history.</p>}</section>
  </div>;
