@@ -38,6 +38,7 @@ const sample={
  {id:'r2',patientId:'p2',title:'Record home glucose reading',time:'08:00',frequency:'Daily',status:'Done'}
  ],
  prescriptions:[],
+ understanding:[],
  consultations:[
  {id:'n1',patientId:'p1',date:plus(-7),summary:'Demo consultation: follow-up and home monitoring discussed.',plan:'Review BP readings at next visit.'}
  ]};
@@ -64,7 +65,7 @@ function App(){
  const clarifications=(data.understanding||[]).filter(x=>!x.reviewedAt&&Object.values(x.answers||{}).includes('help'));
  const matching=voices.filter(v=>v.lang.toLowerCase().split('-')[0]===lang);
  const flash=m=>{setNotice(m);window.scrollTo?.({top:0,behavior:'smooth'})};
- const patch=(key,id,change)=>setData(d=>({...d,[key]:d[key].map(x=>x.id===id?{...x,...change}:x)}));
+ const patch=(key,id,change)=>setData(d=>({...d,[key]:(d[key]||[]).map(x=>x.id===id?{...x,...change}:x)}));
  const add=(key,item)=>setData(d=>({...d,[key]:[{id:uid(),...item},...d[key]]}));
  const remove=(key,id)=>{if(!window.confirm('Delete this demo record?'))return;setData(d=>({...d,[key]:d[key].filter(x=>x.id!==id)}))};
  const pick=()=>data.patients.map(p=><option key={p.id} value={p.id}>{p.name}</option>);
