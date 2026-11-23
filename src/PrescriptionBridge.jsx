@@ -16,9 +16,15 @@ export default function PrescriptionBridge({data,setData,patientId,setPatientId,
  const prescriptions=data.prescriptions||[];
  const imports=prescriptions.filter(x=>x.patientId===patientId).sort((a,b)=>b.created.localeCompare(a.created));
  useEffect(()=>{
-   const handle=event=>{if(event.key===KEY){setDraft(getConfirmed());setMessage('Studio confirmation detected. Review the patient details, then choose Import confirmed prescription.')}};
+   const refresh=()=>{setDraft(getConfirmed());setMessage('Studio confirmation received. Review the patient details, then choose Import confirmation.');};
+   const handle=event=>{if(event.key===KEY)refresh()};
+   const handleMessage=event=>{
+     if(event.origin!==window.location.origin||event.source!==frame.current?.contentWindow)return;
+     if(event.data?.type==='carecompanion:studio-confirmed')refresh();
+   };
    window.addEventListener('storage',handle);
-   return()=>window.removeEventListener('storage',handle);
+   window.addEventListener('message',handleMessage);
+   return()=>{window.removeEventListener('storage',handle);window.removeEventListener('message',handleMessage)};
  },[]);
  function fillPatient(){
   if(!patient)return;
