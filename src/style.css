@@ -114,3 +114,62 @@ body{background:linear-gradient(145deg,#f3f9fa 0%,#f7fafc 48%,#f1f7f9 100%)}
 .understandingoptions button.picked{background:#087f86;color:#fff;border-color:#087f86}
 .clarificationnote{padding:13px 15px;border:1px solid #f4dfad;border-radius:10px;background:#fff8e7;color:#876122;line-height:1.6;font-size:12px;margin-top:16px}
 @media(max-width:900px){.understandingrow{align-items:stretch;flex-direction:column}}
+
+/* Doctor identity and comprehensive patient record */
+.doctoraccount{display:flex;gap:9px;align-items:center;padding:3px 10px 3px 4px;background:#eff8f7;color:#14736f;font-size:12px;max-width:230px}
+.doctoraccount .avatar{flex-shrink:0}.doctoraccount>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doctoroverview{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;background:#fff;border:1px solid #d7e9e7;border-radius:14px;padding:18px 22px}
+.doctoroverview>div{display:grid;gap:6px}.doctoroverview small{color:#15968d;font-size:10px;font-weight:800;letter-spacing:.12em}.doctoroverview strong{font-size:17px}.doctoroverview span{font-size:12px;color:#83949f}
+.doctorbanner{background:linear-gradient(120deg,#094e64,#117c85 70%,#189b92);border-radius:18px;padding:29px;color:#fff;display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:20px}
+.doctorbanner h2{font-size:clamp(23px,3vw,34px);letter-spacing:-.03em;margin:13px 0}
+.doctorbanner p{color:#d7f3ef;font-size:13px;max-width:560px;line-height:1.6}
+.doctorbannerbadge{display:grid;place-items:center;padding:14px 22px;border-radius:12px;border:1px solid #ffffff45;background:#ffffff14;min-width:140px}
+.doctorbannerbadge span,.doctorbannerbadge small{font-size:11px;color:#d8f4ef}.doctorbannerbadge strong{font-size:30px;padding:4px 0}
+.doctortwocol{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,0.8fr);gap:18px;align-items:start}
+.doctorformnotice{border:1px solid #f0dda9;background:#fff9e9;padding:13px 15px;color:#886a2c;border-radius:10px;font-size:12px;line-height:1.6;margin:0 0 17px}
+.doctorsection,.patienteditorsection{padding:14px 0 20px;border-bottom:1px solid #e6eef0}
+.doctorsection h3,.patienteditorsection h3{font-size:16px;margin:0 0 6px}
+.doctorsection>div:first-child p,.patienteditorsection>p{font-size:12px;color:#8a9ba3;margin:0 0 13px;line-height:1.6}
+.doctorfields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px 14px}
+.doctorfields .field:has(textarea){grid-column:1/-1}
+.doctorportrait{width:68px;height:68px;border-radius:20px;display:grid;place-items:center;font-size:36px;margin:20px auto 14px;background:linear-gradient(130deg,#daf7ef,#e8f5f8);color:#159284}
+.doctorcard{text-align:center}.doctorcard h3{font-size:20px;margin:0}
+.doctorqualification{color:#73949a;font-size:13px;line-height:1.5}
+.doctorline{display:flex;justify-content:space-between;gap:12px;text-align:left;padding:13px 0;border-top:1px solid #edf2f3}
+.doctorline span{color:#899ba2;font-size:12px}
+.doctorline strong{font-size:12px;max-width:60%;text-align:right;overflow-wrap:anywhere}
+.doctorabout{font-size:12px;line-height:1.7;color:#63868c;text-align:left}
+.doctorside .panel>h3{font-size:15px}
+.patienteditorsection>.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px 14px}
+.patienteditorsection .field:has(textarea){grid-column:1/-1}
+.formhint{font-size:12px;color:#097b71}
+.dialog:has(.patienteditor){width:min(880px,100%)}
+.patientrecordhead{display:flex;align-items:center;gap:13px;padding-bottom:19px;border-bottom:1px solid #e7efef}
+.patientrecordavatar{background:#e5f7f2;color:#117f78;font-weight:800;font-size:21px;height:60px;width:60px;border-radius:17px;display:grid;place-items:center;flex-shrink:0}
+.patientrecordhead h2{margin:7px 0 3px;font-size:22px}.patientrecordhead p{font-size:12px;color:#79939a;margin:0}
+.patientrecordhead>.pill{margin-left:auto}.eyebrow.dark{color:#0c867d}
+.patientrecordmetrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px;margin:17px 0}
+.patientrecordmetrics>.patientinfopair{background:#f4faf9;border-radius:10px;padding:13px}
+.patientinfopair{padding:9px 0;min-width:0;overflow-wrap:anywhere}
+.patientinfopair span,.patientread span{display:block;color:#8d9da4;font-size:11px;margin-bottom:5px}
+.patientinfopair strong{display:block;color:#234c57;font-size:12px;line-height:1.6}
+.patientrecordgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.patientrecordgrid>section,.patientcarecontext{border:1px solid #e6f0f1;border-radius:12px;padding:20px;background:#fff}
+.patientrecordgrid h3,.patientcarecontext h3{font-size:15px;margin:0 0 15px}
+.patientrecordgrid .patientinfopair{border-bottom:1px solid #f0f3f4}
+.patientread{padding:9px 0;border-bottom:1px solid #f0f3f4;min-width:0}
+.patientread p{font-size:12px;margin:0;line-height:1.6;color:#345661;white-space:pre-wrap;overflow-wrap:anywhere}
+.patientcarecontext{margin-top:16px}
+.patientrecordactions{padding:18px 0;gap:10px}
+.patientcontextrow{grid-template-columns:1fr 1fr}
+.patientdoctorcard{display:flex;gap:14px;align-items:start}
+.patientdoctoricon{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:#098a83;background:#e7f5f0;font-size:24px;flex-shrink:0}
+.patientdoctorcard strong{display:block;font-size:17px}
+.patientdoctorcard p{font-size:12px;color:#728f99;margin:7px 0}
+.patientdoctorcard small{display:block;color:#79969d;font-size:11px;line-height:1.7}
+.patientoverviewgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:17px}
+.patientoverviewgrid>div{padding:12px;background:#f4faf9;border-radius:9px;overflow-wrap:anywhere}
+.patientoverviewgrid span{display:block;color:#8297a0;font-size:11px}
+.patientoverviewgrid strong{display:block;font-size:12px;line-height:1.6;margin-top:6px}
+@media(max-width:1050px){.doctortwocol{grid-template-columns:1fr}.doctorside{display:grid;grid-template-columns:1fr 1fr;gap:16px}.doctorside>.panel{align-self:start}}
+@media(max-width:700px){.doctoraccount>span:last-child{display:none}.doctorbanner{align-items:start;flex-direction:column;padding:22px}.doctorbannerbadge{min-width:0;align-self:stretch}.doctorside{display:block}.doctorfields,.patienteditorsection>.formgrid,.patientrecordgrid,.patientcontextrow{grid-template-columns:1fr}.patientrecordhead{flex-wrap:wrap}.patientrecordhead>.pill{margin-left:0}.patientoverviewgrid{grid-template-columns:1fr}}
