@@ -103,3 +103,14 @@ body{background:linear-gradient(145deg,#f3f9fa 0%,#f7fafc 48%,#f1f7f9 100%)}
 .demoguidefoot{font-size:11px;color:#91a1a8;line-height:1.5;margin:16px 0 0}
 @media(max-width:1100px){.demosteps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){.demosteps{grid-template-columns:1fr}.demochooser{align-items:stretch;flex-direction:column}.demochooser label{justify-content:space-between}}
+
+/* Patient-led instruction clarification loop */
+.teachback{background:linear-gradient(165deg,#fff,#f8fcfb)}
+.understandingrows{display:grid;gap:12px;margin-top:16px}
+.understandingrow{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px;background:#f5faf9;border:1px solid #e3f0ef;border-radius:12px}
+.understandingrow>div:first-child{flex:1;min-width:0}.understandingrow strong{display:block;font-size:13px}.understandingrow small{display:block;font-size:11px;line-height:1.5;color:#859ba1;margin-top:6px}
+.understandingoptions{display:flex;gap:5px;flex-wrap:wrap}
+.understandingoptions button{font-size:11px;background:#fff;border:1px solid #cddfe2;color:#4f727c;padding:8px 10px}
+.understandingoptions button.picked{background:#087f86;color:#fff;border-color:#087f86}
+.clarificationnote{padding:13px 15px;border:1px solid #f4dfad;border-radius:10px;background:#fff8e7;color:#876122;line-height:1.6;font-size:12px;margin-top:16px}
+@media(max-width:900px){.understandingrow{align-items:stretch;flex-direction:column}}
