@@ -60,9 +60,10 @@ export default function PrescriptionBridge({data,doctor,setData,patientId,setPat
   if(prescriptions.some(r=>r.patientId===patientId&&r.sourceCreated===confirmed.created)){
    setMessage('This Studio confirmation is already linked to this patient.');return
   }
+  const captured=confirmed.doctorProfile&&Object.values(confirmed.doctorProfile).some(Boolean)?confirmed.doctorProfile:(doctor||{});
   const item={
    id:crypto.randomUUID?.()||'rx-'+Date.now(),patientId,sourceCreated:confirmed.created,
-   created:confirmed.created,doctor:String(confirmed.doctor||''),doctorProfile:{fullName:String(doctor?.fullName||confirmed.doctor||''),qualification:String(doctor?.qualification||''),specialty:String(doctor?.specialty||''),registrationNumber:String(doctor?.registrationNumber||''),clinicName:String(doctor?.clinicName||''),clinicCity:String(doctor?.clinicCity||''),clinicAddress:String(doctor?.clinicAddress||''),clinicPhone:String(doctor?.clinicPhone||''),email:String(doctor?.email||''),consultationHours:String(doctor?.consultationHours||'')},condition:String(confirmed.condition||''),
+   created:confirmed.created,doctor:String(confirmed.doctor||''),doctorProfile:{fullName:String(captured?.fullName||confirmed.doctor||''),qualification:String(captured?.qualification||''),specialty:String(captured?.specialty||''),registrationNumber:String(captured?.registrationNumber||''),clinicName:String(captured?.clinicName||''),clinicCity:String(captured?.clinicCity||''),clinicAddress:String(captured?.clinicAddress||''),clinicPhone:String(captured?.clinicPhone||''),email:String(captured?.email||''),consultationHours:String(captured?.consultationHours||'')},condition:String(confirmed.condition||''),
    specialty:String(confirmed.specialty||''),allergies:String(confirmed.allergies||''),
    meds:confirmed.meds.map(m=>({
     name:String(m.name||''),dose:String(m.dose||''),route:String(m.route||''),
