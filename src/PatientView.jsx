@@ -2,7 +2,7 @@ import React,{useMemo,useState} from 'react';
 import UnderstandingCheck from './UnderstandingCheck.jsx';
 const fmt=x=>{if(!x)return 'Not scheduled';const d=new Date(String(x).slice(0,10)+'T12:00:00');return Number.isNaN(d.getTime())?String(x):d.toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})};
 const dl=(name,text)=>{const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),100)};
-export default function PatientView({data,setData,patientId,setPatientId,setTab,patch}){
+export default function PatientView({data,doctor,setData,patientId,setPatientId,setTab,patch}){
  const [showHistory,setShowHistory]=useState(false);
  const patient=data.patients.find(p=>p.id===patientId);
  const appointments=data.appointments.filter(x=>x.patientId===patientId&&x.status!=='Cancelled').sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
@@ -10,6 +10,7 @@ export default function PatientView({data,setData,patientId,setPatientId,setTab,
  const reminders=data.reminders.filter(x=>x.patientId===patientId).sort((a,b)=>a.time.localeCompare(b.time));
  const rx=useMemo(()=>(data.prescriptions||[]).filter(x=>x.patientId===patientId).sort((a,b)=>b.created.localeCompare(a.created)),[data.prescriptions,patientId]);
  const latest=rx[0];
+ const clinician=latest?.doctorProfile||doctor||{};
  const pending=tasks.filter(x=>x.status!=='Completed');
  const today=new Date().toLocaleDateString('en-CA');
  const next=appointments.find(x=>x.date>=today);
@@ -17,11 +18,18 @@ export default function PatientView({data,setData,patientId,setPatientId,setTab,
  function exportHandout(){
   if(!patient)return;
   const lines=['CARECOMPANION — FICTIONAL PATIENT CARE HANDOUT','FOR DEMONSTRATION ONLY · NOT A VALID PRESCRIPTION','',
-   'Patient: '+patient.name,'Reported allergies: '+(patient.allergies||'Not recorded'),
+   'Patient: '+patient.name,'Patient ID: '+patient.id,'Age: '+(patient.age||'Not recorded'),'Blood group: '+(patient.bloodGroup||'Not recorded'),'Preferred language: '+(patient.preferredLanguage||'Not recorded'),'Reported allergies: '+(patient.allergies||'Not recorded'),'Patient-reported current medicines: '+(patient.currentMedications||'Not recorded'),'Emergency contact: '+(patient.emergencyName||'Not recorded')+' ('+(patient.emergencyRelation||'relationship not recorded')+')',
    'Next appointment: '+(next?fmt(next.date)+' at '+next.time+' ('+next.type+')':'None scheduled'),'',
    'LATEST IMPORTED STUDIO RECORD',
    latest?'Condition: '+(latest.condition||'Not recorded'):'No Studio record linked',
-   latest?'Clinician (entered): '+(latest.doctor||'Not recorded'):'',
+   'Clinician (entered, unverified): '+(clinician.fullName||latest?.doctor||'Not recorded'),
+   'Qualification (unverified): '+(clinician.qualification||'Not recorded'),
+   'Specialty (unverified): '+(clinician.specialty||'Not recorded'),
+   'Registration number (unverified): '+(clinician.registrationNumber||'Not provided'),
+   'Clinic: '+(clinician.clinicName||'Not recorded'),
+   'Clinic city / location: '+([clinician.clinicCity,clinician.clinicAddress].filter(Boolean).join(' · ')||'Not recorded'),
+   'Clinic hours: '+(clinician.consultationHours||'Not provided'),
+   'Clinic contact: '+(clinician.clinicPhone||clinician.email||'Not provided'),
    ...medicationRows.map(m=>[m.name,m.dose,m.route,m.time,m.meal,m.duration,m.directions].filter(Boolean).join(' | ')),'',
    'FOODS TO TAKE',...(latest?.guidance?.take||[]),
    'FOODS TO AVOID / LIMIT',...(latest?.guidance?.avoid||[]),
@@ -37,6 +45,7 @@ export default function PatientView({data,setData,patientId,setPatientId,setTab,
  <div className="patient-sheet">
  <div className="patientwelcomecard"><div><span className="eyebrow">AFTER-VISIT CARE SUMMARY</span><h2>Hello, {patient?.name.split(' ')[0]||'there'}.</h2><p>Your visit notes, follow-ups, and care instructions in one place.</p></div><div className="patientwelcomeicon">♡</div></div>
  <div className="patientmetrics"><div><small>Next appointment</small><strong>{next?fmt(next.date):'Not scheduled'}</strong><span>{next?next.time+' · '+next.type:'Check with your care team'}</span></div><div><small>Open care tasks</small><strong>{pending.length}</strong><span>{pending.length?'To review or complete':'No pending tasks'}</span></div><div><small>Reported allergies</small><strong>{patient?.allergies||'Not recorded'}</strong><span>Verify with a qualified clinician</span></div></div>
+ <div className="two patientcontextrow"><section className="patientpanel"><h3>Your care team</h3><div className="patientdoctorcard"><div className="patientdoctoricon">✚</div><div><strong>{clinician.fullName||latest?.doctor||'Clinician not recorded'}</strong><p>{[clinician.qualification,clinician.specialty].filter(Boolean).join(' · ')||'Credentials not provided'}</p><small>{clinician.clinicName||'Clinic not provided'}{clinician.clinicCity?' · '+clinician.clinicCity:''}</small><small>{clinician.consultationHours||'Consultation hours not recorded'}</small><small>{clinician.clinicPhone||clinician.email||'Clinic contact not recorded'}</small></div></div><p className="muted">Profile and registration information are self-entered, unverified demo details.</p></section><section className="patientpanel"><h3>Patient details</h3><div className="patientoverviewgrid"><div><span>Blood group</span><strong>{patient?.bloodGroup||'Not recorded'}</strong></div><div><span>Preferred language</span><strong>{patient?.preferredLanguage||'Not recorded'}</strong></div><div><span>Existing medicines</span><strong>{patient?.currentMedications||'Not recorded'}</strong></div><div><span>Emergency contact</span><strong>{patient?.emergencyName||'Not recorded'}</strong></div></div><button className="ghost" onClick={()=>setTab('patients')}>Open full patient record</button></section></div>
  <section className="patientpanel"><div className="patientpanelhead"><h3>Medication plan</h3><span>{latest?'Most recently linked Studio confirmation':'No linked prescription'}</span></div>
  {latest?<><p className="patientcondition">Recorded condition: <strong>{latest.condition||'Not recorded'}</strong> · {fmt(latest.created)}</p>{medicationRows.length?<div className="medgrid">{medicationRows.map((m,i)=><div className="medcard" key={i}><div className="mednum">{String(i+1).padStart(2,'0')}</div><div><strong>{m.name||'Unnamed medicine'}</strong><p>{[m.dose,m.route,m.duration].filter(Boolean).join(' · ')}</p><div className="medpill">{[m.time,m.period,m.meal].filter(Boolean).join(' · ')||'Time not specified'}</div>{m.directions&&<small>{m.directions}</small>}</div></div>)}</div>:<p className="muted">No medicines in this confirmation. It may contain selected care guidance only.</p>}</>:<div className="handoffempty">No prescription imported yet. A clinician can confirm one in Prescription Studio, then explicitly import it for this patient.</div>}
  </section>
