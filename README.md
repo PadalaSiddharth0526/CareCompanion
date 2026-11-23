@@ -20,6 +20,7 @@ A React + Vite **portfolio prototype** that connects a doctor's workflow with a 
 - **Prescription bridge**: prefill Studio patient name, age, sex and reported allergies; confirm the demo in Studio; explicitly import it into the matching patient record
 - **Care Journey**: timeline of appointments, consultations, vitals, follow-ups, and linked confirmed Studio records
 - **Patient View (Demo)**: prescription medicine schedule, selected diet/precaution guidance, care tasks, manual check-ins and printable/downloadable *demo-only* care handout
+- **Care clarity feedback loop:** patient self-reports whether medicine, care, and follow-up instructions are clear. An 'Need explanation' selection appears on the demo doctor dashboard as a clarification request, which can be marked reviewed. This is not a comprehension assessment or a real message to a clinician.
 - Analytics for recorded patient conditions, appointment dates, and vitals
 - Clinician documentation checklist and browser-based multilingual voice availability diagnostics
 - Local JSON export and reset of fictional demo records
@@ -32,7 +33,7 @@ A React + Vite **portfolio prototype** that connects a doctor's workflow with a 
 4. In the embedded Studio, complete the clinician-entered example fields, medicines (if any), food guidance, and precautions. Select **Confirm demo prescription** in its Review tab.
 5. Above the Studio, select **Import confirmation**. This explicit step checks that the Studio patient name matches the selected record, prevents duplicate imports and links a snapshot to the record.
 6. Open **Care Journey** to see the prescription event, then **Patient View (Demo)** to read the medication plan, selected guidance and follow-ups.
-7. Mark a reminder complete or download the fictional care handout.
+7. Mark a reminder complete or download the fictional care handout. In **Patient View**, select **Need explanation** for a clarity topic; return to the doctor dashboard to see the clarification queue, and optionally mark the request reviewed.
 
 ## Local development
 
