@@ -52,3 +52,41 @@ body{background:linear-gradient(145deg,#f3f9fa 0%,#f7fafc 48%,#f1f7f9 100%)}
 .timelineempty p{font-size:13px}
 @media(max-width:850px){.upgradeart{display:none}.journeyhero{align-items:flex-start;flex-direction:column}.journeyallergy{margin-left:0}}
 @media(max-width:700px){.upgradehero{padding:24px;min-height:0}.journeyhero{padding:23px}.journeyhero h2{font-size:24px}.journeypicker{align-items:stretch;flex-direction:column}.journeypicker select{width:100%}.journeyactions{gap:7px}.journeyidentity{align-items:flex-start}.timelineheading{flex-direction:column}}
+
+/* Prescription handoff: the bridge between legacy Studio and patient records */
+.handoffhero,.patienthero{display:flex;justify-content:space-between;align-items:center;gap:24px;border-radius:18px;padding:28px 30px;margin-bottom:20px;background:linear-gradient(120deg,#075568,#0a9a96);color:#fff}
+.handoffhero h2,.patienthero h2{font-size:clamp(22px,2.5vw,32px);letter-spacing:-.035em;margin:12px 0}.handoffhero p,.patienthero p{font-size:13px;line-height:1.6;color:#e0f3f2;max-width:640px}
+.handoffhero>button{background:white;color:#087782;white-space:nowrap}
+.handoffcontrols{display:flex;flex-wrap:wrap;align-items:end;gap:12px}.handoffcontrols .field{flex:1;min-width:210px;margin:0}.handoffcontrols button{margin-bottom:1px}
+.handoffmessage{padding:13px 15px;background:#e8f7f1;color:#136d5c;border-radius:9px;font-size:13px;line-height:1.6}
+.handoffsummary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.handoffsummary>div{display:grid;gap:6px;align-content:start;background:#f5fafa;border:1px solid #e2f0f0;border-radius:12px;padding:18px}
+.handoffsummary small{font-size:11px;color:#84989f}
+.handoffsummary strong{font-size:17px;color:#165966;overflow-wrap:anywhere}
+.handoffsummary span{font-size:12px;color:#79949c;line-height:1.5}
+.rxhistory{display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid #e9eff1;padding:15px 2px}
+.rxhistory>div{display:grid;gap:6px}.rxhistory strong{font-size:14px}.rxhistory span{font-size:12px;color:#8299a2}.handoffempty{padding:25px;background:#f5fafb;border:1px dashed #ccdfe3;border-radius:12px;color:#6b8b95;font-size:13px;line-height:1.6}
+.patienthero{background:linear-gradient(120deg,#114c61,#117c77)}
+.patientbar{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.patientbar>label{display:grid;gap:7px;font-size:12px;color:#7c909a;font-weight:700}.patientbar>label select{min-width:230px}.patientbar>div{display:flex;flex-wrap:wrap;gap:8px}
+.patient-sheet{max-width:1100px;margin:0 auto 18px;background:#fff;border:1px solid #e4eff2;border-radius:20px;padding:28px;box-shadow:0 12px 40px #0b59600b}
+.patientwelcomecard{display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(125deg,#07576b,#0f8e86);color:#fff;border-radius:15px;padding:27px}
+.patientwelcomecard h2{font-size:29px;margin:10px 0}.patientwelcomecard p{color:#e0f6f2;font-size:13px}.patientwelcomeicon{font-size:66px;color:#d7f9ed}
+.patientmetrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.patientmetrics>div{background:#f4faf9;border-radius:12px;padding:17px;display:grid;gap:8px}
+.patientmetrics small{color:#8298a0;font-size:11px}.patientmetrics strong{font-size:17px;overflow-wrap:anywhere}.patientmetrics span{font-size:11px;color:#86a1a6}
+.patientpanel{border:1px solid #e6eff0;border-radius:14px;padding:22px;margin-bottom:18px;min-width:0}
+.patientpanel h3{margin:0 0 16px;font-size:18px}.patientpanelhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.patientpanelhead span{font-size:11px;color:#8ea2a9}
+.patientcondition{font-size:13px;color:#778b93}.medgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.medcard{display:flex;gap:12px;background:#f7fbfb;border:1px solid #e7f0f1;padding:17px;border-radius:12px}
+.mednum{display:grid;place-items:center;min-width:34px;height:34px;border-radius:10px;background:#dff4ef;color:#087970;font-weight:800}
+.medcard strong{font-size:14px}.medcard p,.medcard small{display:block;color:#7f929b;font-size:12px;line-height:1.5}.medpill{display:inline-block;color:#0a746d;background:#e0f5ef;border-radius:30px;padding:6px 10px;font-size:11px}
+.careguidance{margin-bottom:16px}.careguidance strong{font-size:13px}.careguidance ul{padding-left:20px;color:#5b7e85;font-size:13px;line-height:1.8}.careguidance p{color:#9aabb0;font-size:12px}
+.patienttask{display:flex;justify-content:space-between;align-items:flex-start;gap:13px;border-bottom:1px solid #edf3f3;padding:13px 0}
+.patienttask strong,.patienttask small{display:block}.patienttask strong{font-size:13px}.patienttask small,.patienttask p{font-size:11px;color:#829aa2;line-height:1.5}
+.patientpanel h4{font-size:13px;margin-top:25px}.patientreminder{display:flex;gap:10px;align-items:center;padding:12px;border-radius:9px;background:#f6faf9;margin-bottom:8px;cursor:pointer}
+.patientreminder input{accent-color:#078d86}.patientreminder strong,.patientreminder small{display:block;font-size:12px}.patientreminder small{color:#90a0a7;margin-top:4px}
+.patientdisclaimer{border-radius:11px;padding:16px;background:#fff6e7;color:#806736;font-size:12px;line-height:1.6}
+@media(max-width:900px){.handoffsummary{grid-template-columns:1fr}.medgrid{grid-template-columns:1fr}}
+@media(max-width:700px){.handoffhero,.patienthero{padding:21px;flex-direction:column;align-items:flex-start}.handoffcontrols{align-items:stretch;flex-direction:column}.handoffcontrols .field{min-width:0;width:100%}.handoffcontrols button{width:100%}.patient-sheet{padding:13px}.patientwelcomecard{padding:18px}.patientwelcomeicon{display:none}.patientmetrics{grid-template-columns:1fr}.patientpanel{padding:16px}.patientbar>label,.patientbar>label select{width:100%}.rxhistory{align-items:flex-start;flex-direction:column}}
+@media print{.sidebar,.top,.patienthero,.patientbar,.patientpreview>.panel,.notice,.patientpanelhead span{display:none!important}.main{width:100%}.page{padding:0!important}.patient-sheet{box-shadow:none;border:0;padding:0}.patientwelcomecard{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
